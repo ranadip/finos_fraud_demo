@@ -1,0 +1,13 @@
+[project]
+name = "fsi-fraud-nba-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "google-adk>=1.2.0",
+    "streamlit",
+    "llama-index",
+    "llama-index-llms-google-genai",
+    "llama-index-embeddings-google-genai",
+]
