@@ -7,7 +7,7 @@ This document outlines the steps to run the FastAPI service and the Streamlit ap
 To start the FastAPI service, navigate to the project directory and run the following command:
 
 ```bash
-uvicorn runner:app --port 8601
+uvicorn next-steps-agentic_app:app --port 8601
 ```
 
 This will start the service on the default port (usually 8000). You can access the API endpoints at `http://localhost:8601`.
@@ -17,7 +17,7 @@ This will start the service on the default port (usually 8000). You can access t
 For development purposes, you can enable hot reload mode, which automatically restarts the server when you make changes to the code. To do this, use the following command:
 
 ```bash
-uvicorn runner:app --reload --port 8601
+uvicorn next-steps-agentic_app:app --reload --port 8601
 ```
 
 ## 2. Start the Streamlit Application
