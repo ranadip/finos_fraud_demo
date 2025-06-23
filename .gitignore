@@ -11,3 +11,6 @@ wheels/
 
 # embeddings index
 _index/
+
+# Mac temp files
+.DS_Store
