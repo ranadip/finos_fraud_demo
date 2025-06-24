@@ -13,7 +13,21 @@ USER_ID="testuser"
 
 import logging
 logging.basicConfig(level=logging.INFO)
-logging.debug("test")
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
+# log.propagate = 0
+# log.addHandler(handler1)
+
+import io
+log_stream = io.StringIO()
+# from contextlib import redirect_stdout
+# redirect_stdout(log_stream)
+handler2 = logging.StreamHandler(log_stream)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+handler2.setFormatter(formatter)
+log.addHandler(handler2)
+
+runningIndicator = True
 
 session_service = VertexAiSessionService(
   PROJECT_ID, LOCATION)
@@ -81,7 +95,26 @@ else:
 
     @app.post("/next_steps")
     async def read_root(request: Request):
+        runningIndicator = True
         payload = await request.json()
         prompt = payload.get("prompt")
         response = await run_conversation_w_prompt(prompt.strip())
+        runningIndicator = False
         return response
+
+    from fastapi.responses import StreamingResponse
+
+    @app.get("/logs")
+    async def stream_logs():
+        async def log_generator():
+            while True:
+                log_data = log_stream.getvalue()
+                if log_data:
+                    yield log_data
+                    log_stream.truncate(0)
+                    log_stream.seek(0)
+                if not runningIndicator:
+                    break
+                await asyncio.sleep(0.5)
+
+        return StreamingResponse(log_generator(), media_type="text/event-stream")

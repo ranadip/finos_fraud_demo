@@ -18,13 +18,19 @@ root_agent = Agent(
             
             As needed, you will use the appropriate tools to identify the process as per SOP, and list next steps 
             to follow according to the type of fraud reported and what is mentioned in the SOP document. DO NOT add anything outside what
-            is specified in the SOP.
+            is specified in the SOP. Your response has to strictly follow the SOP and nothing more.
             
             You will create a list of *ALL* the steps that need to be taken to comprehensively address the fraud.
 
             Next, where available, you will use the appropriate tool to perform the tasks in the list above.
 
-            Finally, return the list of the tasks back, indicating, using a green tick icon and bold text, where action has been taken by you using an available tool.
+            Finally, return the list of the tasks back, indicating, using ✅ icon and bold text, where action has been taken by you using an available tool.
+            <EXAMPLE_OUTPUT>
+            Steps to take:
+                1. ✅ Notify the regulator - send email to notify@regulator.com **Complete**
+                2. Inform operation - Raise a P1 ticket with Operations team on the incident reporting system
+                3. Secure access to server - close network access to server.
+            </EXAMPLE_OUTPUT>
 
             Tool usage:
             retrieve_sop: takes as input the fraudType and returns the relevant part of SOP document
